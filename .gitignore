@@ -1,2 +1,14 @@
-chaat
-chaat.exe
+# Ignoring build directories
+build/**
+
+# Ignoring IDE configuration files
+.vscode/**
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+
+# Output of the go coverage too
+*.out 
+
