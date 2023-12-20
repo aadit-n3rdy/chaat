@@ -28,17 +28,18 @@ int chaat_reciever(int sock) {
 int chaat_sender(int sock, const struct sockaddr *dest_addr, socklen_t dest_len) {
 	char buf[BUFSIZE];
 	while (1) {
-		fgets(buf, BUFSIZE, stdin);
+		fgets(buf, BUFSIZE-1, stdin);
 		int slen = strlen(buf);
-		buf[slen] = '\n';
-		buf[slen+1] = '\0';
 		if (slen > 0) {
+			buf[slen] = '\n';
+			slen++;
+			buf[slen] = '\0';
 			int len = sendto(sock, buf, strlen(buf)-1, 0, dest_addr, dest_len);
 			if (len < 0) {
 				printf("Sending \"%s\" failed due to error: %s\n", buf, strerror(errno));
 				return -1;
-			} else if (len != slen) {
-				printf("Did not send entire length: %d of %d\n", len, slen);
+			} else if (len != slen-1) {
+				printf("WARN: Did not send entire length: %d of %d\n", len, slen);
 				return -1;
 			}
 		}
