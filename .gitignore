@@ -1,2 +1,7 @@
 build
 .cache
+CAPrivate.pem
+CAPrivate.key
+ServCert.crt
+ServPrivate.key
+ServRequest.csr
